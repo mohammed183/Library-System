@@ -91,6 +91,7 @@ public class issueBook extends JFrame {
 		contentPane.add(conMessage);
 
 		callTxt = new JTextField();
+		callTxt.setTransferHandler(null);
 		callTxt.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -111,6 +112,7 @@ public class issueBook extends JFrame {
 		callTxt.setColumns(10);
 
 		stdTxt = new JTextField();
+		stdTxt.setTransferHandler(null);
 		stdTxt.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -135,6 +137,7 @@ public class issueBook extends JFrame {
 		stdTxt.setColumns(10);
 
 		stdntTxt = new JTextField();
+		stdntTxt.setTransferHandler(null);
 		stdntTxt.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -154,6 +157,7 @@ public class issueBook extends JFrame {
 		stdntTxt.setColumns(10);
 
 		conTxt = new JTextField();
+		conTxt.setTransferHandler(null);
 		conTxt.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {

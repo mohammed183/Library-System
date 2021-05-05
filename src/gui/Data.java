@@ -69,8 +69,6 @@ public class Data {
 			e.printStackTrace();
 		}
 	}
-
-	
 	
 	
 	
@@ -140,7 +138,6 @@ public class Data {
 	public static void main(String[] argv) {
 		
 		Data data = new Data();
-		
 		
 		data.addAdmin("admin", "admin");
 		data.readData();

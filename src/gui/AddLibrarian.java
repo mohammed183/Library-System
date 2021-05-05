@@ -27,7 +27,7 @@ public class AddLibrarian extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField nametext;
-	private JTextField emailtext;
+	private JTextField emailText;
 	private JTextField passwordtext;
 	private JTextField addresstext;
 	private JTextField citytext;
@@ -92,6 +92,7 @@ public class AddLibrarian extends JFrame {
 				}
 			}
 		});
+		nametext.setTransferHandler(null);
 		nametext.setBounds(175, 107, 212, 24);
 		contentPane.add(nametext);
 		nametext.setColumns(10);
@@ -101,9 +102,10 @@ public class AddLibrarian extends JFrame {
 		lblNewLabel_1_1.setBounds(36, 223, 75, 24);
 		contentPane.add(lblNewLabel_1_1);
 
-		emailtext = new JTextField();
-		emailtext.setCaretColor(Color.BLACK);
-		emailtext.addKeyListener(new KeyAdapter() {
+		emailText = new JTextField();
+		emailText.setTransferHandler(null);
+		emailText.setCaretColor(Color.BLACK);
+		emailText.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
 
 				if (Character.isLetter(e.getKeyChar()) || Character.isWhitespace(e.getKeyChar())
@@ -111,17 +113,17 @@ public class AddLibrarian extends JFrame {
 						|| e.getKeyChar() == '@' || e.getKeyChar() == '.' || e.getKeyChar() == '-'
 						|| e.getKeyChar() == '_') {
 					emailMessage.setText("");
-					emailtext.setEditable(true);
+					emailText.setEditable(true);
 				} else {
 					emailMessage.setText(e.getKeyChar() + " not allowed");
-					emailtext.setEditable(false);
+					emailText.setEditable(false);
 				}
 			}
 		});
-		emailtext.setForeground(Color.BLACK);
-		emailtext.setColumns(10);
-		emailtext.setBounds(175, 227, 212, 24);
-		contentPane.add(emailtext);
+		emailText.setForeground(Color.BLACK);
+		emailText.setColumns(10);
+		emailText.setBounds(175, 227, 212, 24);
+		contentPane.add(emailText);
 
 		JLabel lblNewLabel_1_2 = new JLabel("Password:");
 		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -129,6 +131,7 @@ public class AddLibrarian extends JFrame {
 		contentPane.add(lblNewLabel_1_2);
 
 		passwordtext = new JTextField();
+		passwordtext.setTransferHandler(null);
 		passwordtext.setColumns(10);
 		passwordtext.setBounds(175, 167, 212, 24);
 		contentPane.add(passwordtext);
@@ -139,6 +142,7 @@ public class AddLibrarian extends JFrame {
 		contentPane.add(lblNewLabel_1_3);
 
 		addresstext = new JTextField();
+		addresstext.setTransferHandler(null);
 		addresstext.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -164,6 +168,7 @@ public class AddLibrarian extends JFrame {
 		contentPane.add(lblNewLabel_1_4);
 
 		citytext = new JTextField();
+		citytext.setTransferHandler(null);
 		citytext.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -187,10 +192,11 @@ public class AddLibrarian extends JFrame {
 		contentPane.add(lblNewLabel_2);
 
 		contacttext = new JTextField();
+		contacttext.setTransferHandler(null);
 		contacttext.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-
+				
 				if (Character.isDigit(e.getKeyChar()) || e.getKeyChar() == '+'
 						|| Character.isISOControl(e.getKeyChar())) {
 					contactmessage.setText("");
@@ -209,11 +215,11 @@ public class AddLibrarian extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (nametext.getText().equals("") || passwordtext.getText().equals("") || emailtext.getText().equals("")
+				if (nametext.getText().equals("") || passwordtext.getText().equals("") || emailText.getText().equals("")
 						|| addresstext.getText().equals("") || citytext.getText().equals("")
 						|| contacttext.getText().equals("")) {
 					JOptionPane.showMessageDialog(null, "Please fill all Data!", "Message", JOptionPane.PLAIN_MESSAGE);
-				} else if (!isValid(emailtext.getText())) {
+				} else if (!isValid(emailText.getText())) {
 					JOptionPane.showMessageDialog(null, "Please Enter a Valid Email!", "Message",
 							JOptionPane.PLAIN_MESSAGE);
 				} else {
@@ -229,7 +235,7 @@ public class AddLibrarian extends JFrame {
 						data.lib[data.libCount][0] = idText.getText();
 						data.lib[data.libCount][1] = nametext.getText().trim();
 						data.lib[data.libCount][2] = passwordtext.getText();
-						data.lib[data.libCount][3] = emailtext.getText();
+						data.lib[data.libCount][3] = emailText.getText();
 						data.lib[data.libCount][4] = addresstext.getText().trim();
 						data.lib[data.libCount][5] = citytext.getText().trim();
 						data.lib[data.libCount][6] = contacttext.getText();
@@ -238,7 +244,7 @@ public class AddLibrarian extends JFrame {
 						idText.setText("");
 						nametext.setText("");
 						passwordtext.setText("");
-						emailtext.setText("");
+						emailText.setText("");
 						addresstext.setText("");
 						citytext.setText("");
 						contacttext.setText("");
@@ -280,6 +286,7 @@ public class AddLibrarian extends JFrame {
 				}
 			}
 		});
+		idText.setTransferHandler(null);
 		idText.setColumns(10);
 		idText.setBounds(175, 51, 212, 24);
 		contentPane.add(idText);

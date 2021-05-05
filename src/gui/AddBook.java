@@ -39,8 +39,9 @@ public class AddBook extends javax.swing.JFrame {
 				}								
 			}
 		});
+		Callnotxt.setTransferHandler(null);
 		Nametxt = new javax.swing.JTextField();
-
+		Nametxt.setTransferHandler(null);
 		Authtxt = new javax.swing.JTextField();
 		Authtxt.addKeyListener(new KeyAdapter() {
 			@Override
@@ -55,7 +56,9 @@ public class AddBook extends javax.swing.JFrame {
 					Authtxt.setEditable(false);
 				}				
 			}
-		});
+		});		
+		Authtxt.setTransferHandler(null);
+		
 		Publishertxt = new javax.swing.JTextField();
 		Publishertxt.addKeyListener(new KeyAdapter() {
 			@Override
@@ -71,6 +74,7 @@ public class AddBook extends javax.swing.JFrame {
 				}		
 			}
 		});
+		Publishertxt.setTransferHandler(null);
 		Quantitytxt = new javax.swing.JTextField();
 		Quantitytxt.addKeyListener(new KeyAdapter() {
 			@Override
@@ -85,6 +89,7 @@ public class AddBook extends javax.swing.JFrame {
 				}				
 			}
 		});
+		Quantitytxt.setTransferHandler(null);
 		jLabel1 = new javax.swing.JLabel();
 		jLabel2 = new javax.swing.JLabel();
 		jLabel3 = new javax.swing.JLabel();
