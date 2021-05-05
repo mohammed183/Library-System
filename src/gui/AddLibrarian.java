@@ -42,8 +42,7 @@ public class AddLibrarian extends JFrame {
 	private JLabel addressmessage;
 	private JLabel citymessage;
 	private JLabel contactmessage;
-	
-	
+
 	public static boolean isValid(String email)// email validation function
 	{
 		String emailRegex = "^[a-zA-Z0-9_+&*-\\.]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
@@ -54,10 +53,9 @@ public class AddLibrarian extends JFrame {
 	}
 
 	public AddLibrarian(Data data) {
-		
-		
+
 		setPreferredSize(new Dimension(560, 530));
-		
+
 		setTitle("Add Librarian");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -84,11 +82,11 @@ public class AddLibrarian extends JFrame {
 		nametext.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(Character.isLetter(e.getKeyChar()) || Character.isWhitespace(e.getKeyChar()) || Character.isISOControl(e.getKeyChar())) {
+				if (Character.isLetter(e.getKeyChar()) || Character.isWhitespace(e.getKeyChar())
+						|| Character.isISOControl(e.getKeyChar())) {
 					nameMessage.setText("");
 					nametext.setEditable(true);
-				}
-				else {
+				} else {
 					nameMessage.setText("Only characrers and spaces are allowed!");
 					nametext.setEditable(false);
 				}
@@ -107,19 +105,17 @@ public class AddLibrarian extends JFrame {
 		emailtext.setCaretColor(Color.BLACK);
 		emailtext.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
-				
-				if(Character.isLetter(e.getKeyChar()) || Character.isWhitespace(e.getKeyChar()) 
-						|| Character.isDigit(e.getKeyChar()) || Character.isISOControl(e.getKeyChar()) || 
-						e.getKeyChar() == '@' || e.getKeyChar() =='.' || e.getKeyChar() == '-' || e.getKeyChar() == '_' ) 
-				{
+
+				if (Character.isLetter(e.getKeyChar()) || Character.isWhitespace(e.getKeyChar())
+						|| Character.isDigit(e.getKeyChar()) || Character.isISOControl(e.getKeyChar())
+						|| e.getKeyChar() == '@' || e.getKeyChar() == '.' || e.getKeyChar() == '-'
+						|| e.getKeyChar() == '_') {
 					emailMessage.setText("");
 					emailtext.setEditable(true);
-				}
-				else 
-				{
+				} else {
 					emailMessage.setText(e.getKeyChar() + " not allowed");
 					emailtext.setEditable(false);
-				}			
+				}
 			}
 		});
 		emailtext.setForeground(Color.BLACK);
@@ -146,18 +142,16 @@ public class AddLibrarian extends JFrame {
 		addresstext.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				
-				if(Character.isLetter(e.getKeyChar()) || Character.isWhitespace(e.getKeyChar()) 
+
+				if (Character.isLetter(e.getKeyChar()) || Character.isWhitespace(e.getKeyChar())
 						|| Character.isDigit(e.getKeyChar()) || Character.isISOControl(e.getKeyChar())
-						|| e.getKeyChar() =='.' || e.getKeyChar() == '-' || e.getKeyChar() == '_' )
-				{
+						|| e.getKeyChar() == '.' || e.getKeyChar() == '-' || e.getKeyChar() == '_') {
 					addressmessage.setText("");
 					addresstext.setEditable(true);
-				}
-				else {
+				} else {
 					addressmessage.setText(e.getKeyChar() + "not allowed");
 					addresstext.setEditable(false);
-				}					
+				}
 			}
 		});
 		addresstext.setColumns(10);
@@ -173,14 +167,14 @@ public class AddLibrarian extends JFrame {
 		citytext.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(Character.isLetter(e.getKeyChar()) || Character.isWhitespace(e.getKeyChar()) || Character.isISOControl(e.getKeyChar())) {
+				if (Character.isLetter(e.getKeyChar()) || Character.isWhitespace(e.getKeyChar())
+						|| Character.isISOControl(e.getKeyChar())) {
 					citymessage.setText("");
 					citytext.setEditable(true);
-				}
-				else {
+				} else {
 					citymessage.setText("Only characrers and spaces are allowed!");
 					citytext.setEditable(false);
-				}		
+				}
 			}
 		});
 		citytext.setColumns(10);
@@ -196,15 +190,15 @@ public class AddLibrarian extends JFrame {
 		contacttext.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				
-				if(Character.isDigit(e.getKeyChar()) || e.getKeyChar() == '+' || Character.isISOControl(e.getKeyChar())) {	
+
+				if (Character.isDigit(e.getKeyChar()) || e.getKeyChar() == '+'
+						|| Character.isISOControl(e.getKeyChar())) {
 					contactmessage.setText("");
 					contacttext.setEditable(true);
-				}
-				else {
+				} else {
 					contactmessage.setText("numbers only!");
 					contacttext.setEditable(false);
-				}							
+				}
 			}
 		});
 		contacttext.setColumns(10);
@@ -219,29 +213,39 @@ public class AddLibrarian extends JFrame {
 						|| addresstext.getText().equals("") || citytext.getText().equals("")
 						|| contacttext.getText().equals("")) {
 					JOptionPane.showMessageDialog(null, "Please fill all Data!", "Message", JOptionPane.PLAIN_MESSAGE);
-				} 
-				else if(!isValid(emailtext.getText())) {
-					JOptionPane.showMessageDialog(null, "Please Enter a Valid Email!", "Message", JOptionPane.PLAIN_MESSAGE);
-				}
-				else {
-					data.lib[data.libCount][0] = idText.getText();
-					data.lib[data.libCount][1] = nametext.getText().trim();
-					data.lib[data.libCount][2] = passwordtext.getText();
-					data.lib[data.libCount][3] = emailtext.getText();
-					data.lib[data.libCount][4] = addresstext.getText().trim();
-					data.lib[data.libCount][5] = citytext.getText().trim();
-					data.lib[data.libCount][6] = contacttext.getText();
-					data.libCount++;
+				} else if (!isValid(emailtext.getText())) {
+					JOptionPane.showMessageDialog(null, "Please Enter a Valid Email!", "Message",
+							JOptionPane.PLAIN_MESSAGE);
+				} else {
+					Boolean valid = true;
+					for (int i = 0; i < data.libCount; i++) {
+						if (data.lib[i][0].equals(idText.getText())) {
+							valid = false;
+							JOptionPane.showMessageDialog(null, "ID already taken", "Message",
+									JOptionPane.PLAIN_MESSAGE);
+						}
+					}
+					if (valid) {
+						data.lib[data.libCount][0] = idText.getText();
+						data.lib[data.libCount][1] = nametext.getText().trim();
+						data.lib[data.libCount][2] = passwordtext.getText();
+						data.lib[data.libCount][3] = emailtext.getText();
+						data.lib[data.libCount][4] = addresstext.getText().trim();
+						data.lib[data.libCount][5] = citytext.getText().trim();
+						data.lib[data.libCount][6] = contacttext.getText();
+						data.libCount++;
 
-					idText.setText("");
-					nametext.setText("");
-					passwordtext.setText("");
-					emailtext.setText("");
-					addresstext.setText("");
-					citytext.setText("");
-					contacttext.setText("");
-					JOptionPane.showMessageDialog(null, "Librarian added successfully!", "Message",JOptionPane.PLAIN_MESSAGE);
-					data.updateLibData();
+						idText.setText("");
+						nametext.setText("");
+						passwordtext.setText("");
+						emailtext.setText("");
+						addresstext.setText("");
+						citytext.setText("");
+						contacttext.setText("");
+						JOptionPane.showMessageDialog(null, "Librarian added successfully!", "Message",
+								JOptionPane.PLAIN_MESSAGE);
+						data.updateLibData();
+					}
 				}
 			}
 		});
@@ -260,18 +264,17 @@ public class AddLibrarian extends JFrame {
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnNewButton_1.setBounds(10, 460, 80, 20);
 		contentPane.add(btnNewButton_1);
-		
+
 		idText = new JTextField();
 		idText.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 
-				if(Character.isDigit(e.getKeyChar()) || Character.isISOControl(e.getKeyChar())) {
+				if (Character.isDigit(e.getKeyChar()) || Character.isISOControl(e.getKeyChar())) {
 					idMessage.setText("");
 					idText.setEditable(true);
 
-				}
-				else {
+				} else {
 					idText.setEditable(false);
 					idMessage.setText("numbers only!");
 				}
@@ -280,42 +283,42 @@ public class AddLibrarian extends JFrame {
 		idText.setColumns(10);
 		idText.setBounds(175, 51, 212, 24);
 		contentPane.add(idText);
-		
+
 		JLabel lblNewLabel_1_5 = new JLabel("ID:");
 		lblNewLabel_1_5.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblNewLabel_1_5.setBounds(36, 47, 75, 24);
 		contentPane.add(lblNewLabel_1_5);
-		
+
 		idMessage = new JLabel("");
 		idMessage.setFont(new Font("Tahoma", Font.PLAIN, 8));
 		idMessage.setForeground(Color.RED);
 		idMessage.setBounds(175, 73, 212, 13);
 		contentPane.add(idMessage);
-		
+
 		nameMessage = new JLabel("");
 		nameMessage.setForeground(Color.RED);
 		nameMessage.setFont(new Font("Tahoma", Font.PLAIN, 8));
 		nameMessage.setBounds(175, 128, 212, 13);
 		contentPane.add(nameMessage);
-		
+
 		emailMessage = new JLabel("");
 		emailMessage.setForeground(Color.RED);
 		emailMessage.setFont(new Font("Tahoma", Font.PLAIN, 8));
 		emailMessage.setBounds(175, 249, 212, 13);
 		contentPane.add(emailMessage);
-		
+
 		addressmessage = new JLabel("");
 		addressmessage.setForeground(Color.RED);
 		addressmessage.setFont(new Font("Tahoma", Font.PLAIN, 8));
 		addressmessage.setBounds(175, 309, 212, 13);
 		contentPane.add(addressmessage);
-		
+
 		citymessage = new JLabel("");
 		citymessage.setForeground(Color.RED);
 		citymessage.setFont(new Font("Tahoma", Font.PLAIN, 8));
 		citymessage.setBounds(175, 371, 212, 13);
 		contentPane.add(citymessage);
-		
+
 		contactmessage = new JLabel("");
 		contactmessage.setForeground(Color.RED);
 		contactmessage.setFont(new Font("Tahoma", Font.PLAIN, 8));
