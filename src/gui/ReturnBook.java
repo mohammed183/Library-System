@@ -201,10 +201,10 @@ public class ReturnBook extends javax.swing.JFrame {
     	Boolean found = false;
     	for(int i = 0; i < data.issCount; i++) {
     		
-    		if(bookCallText.getText().equals(data.issBooks[i][1]) && studentIdText.getText().equals(data.issBooks[i][2])) {
+    		if(bookCallText.getText().equals(data.issBooks[i].getBookCallNo()) && studentIdText.getText().equals(data.issBooks[i].getStudentId())) {
     			int index = -1;
     			for (int j = 0; j < data.booksCount; j++) {
-    				if (data.issBooks[i][1].equals(data.books[j].getCallNo()) )
+    				if (data.issBooks[i].getBookCallNo().equals(data.books[j].getCallNo()) )
     	    			index = j;
     			}
     			data.books[index].setIssued(-1);
@@ -225,15 +225,21 @@ public class ReturnBook extends javax.swing.JFrame {
     			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
     			Date issDate = null;
 				try {
-					issDate = format.parse((String) data.issBooks[i][5]);
+					issDate = format.parse(data.issBooks[i].getDate());
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}    			
+				}
+				for(int j = 0; j < data.stdCount; j++) {
+					if(data.std[j].getId().equals(studentIdText.getText())) {
+						data.std[j].setIss(-1);
+					}
+				}
 				
     			data.issCount--;
     			data.updateBookData();
     			data.updateissueData();
+    			data.updateStdData();
     			
 				long diff = reDate.getTime() - issDate.getTime(); 
 				int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);

@@ -65,25 +65,25 @@ public class issueBook extends JFrame {
 		idM.setForeground(Color.RED);
 		idM.setBounds(203, 97, 203, 13);
 		contentPane.add(idM);
-		
+
 		JLabel callMessage = new JLabel("");
 		callMessage.setForeground(Color.RED);
 		callMessage.setFont(new Font("Tahoma", Font.PLAIN, 8));
 		callMessage.setBounds(203, 164, 203, 13);
 		contentPane.add(callMessage);
-		
+
 		JLabel stdMessage = new JLabel("");
 		stdMessage.setForeground(Color.RED);
 		stdMessage.setFont(new Font("Tahoma", Font.PLAIN, 8));
 		stdMessage.setBounds(203, 223, 203, 13);
 		contentPane.add(stdMessage);
-		
+
 		JLabel stdntMessage = new JLabel("");
 		stdntMessage.setForeground(Color.RED);
 		stdntMessage.setFont(new Font("Tahoma", Font.PLAIN, 8));
 		stdntMessage.setBounds(203, 283, 203, 13);
 		contentPane.add(stdntMessage);
-		
+
 		JLabel conMessage = new JLabel("");
 		conMessage.setForeground(Color.RED);
 		conMessage.setFont(new Font("Tahoma", Font.PLAIN, 8));
@@ -95,15 +95,14 @@ public class issueBook extends JFrame {
 		callTxt.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				
-				if(Character.isDigit(e.getKeyChar()) || Character.isISOControl(e.getKeyChar())) {
+
+				if (Character.isDigit(e.getKeyChar()) || Character.isISOControl(e.getKeyChar())) {
 					callMessage.setText("");
 					callTxt.setEditable(true);
 
-				}
-				else {
+				} else {
 					callTxt.setEditable(false);
-					callMessage.setText("numbers only!");				
+					callMessage.setText("numbers only!");
 				}
 			}
 		});
@@ -117,19 +116,15 @@ public class issueBook extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent e) {
 
-				if(Character.isDigit(e.getKeyChar()) || Character.isISOControl(e.getKeyChar())) {
+				if (Character.isDigit(e.getKeyChar()) || Character.isISOControl(e.getKeyChar())) {
 					stdMessage.setText("");
 					stdTxt.setEditable(true);
 
-				}
-				else {
+				} else {
 					stdTxt.setEditable(false);
-					stdMessage.setText("numbers only!");				
+					stdMessage.setText("numbers only!");
 				}
-			
-				
-		
-				
+
 			}
 		});
 		stdTxt.setBounds(203, 187, 203, 28);
@@ -141,15 +136,15 @@ public class issueBook extends JFrame {
 		stdntTxt.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(Character.isLetter(e.getKeyChar()) || Character.isWhitespace(e.getKeyChar()) || Character.isISOControl(e.getKeyChar())) {
+				if (Character.isLetter(e.getKeyChar()) || Character.isWhitespace(e.getKeyChar())
+						|| Character.isISOControl(e.getKeyChar())) {
 					stdntMessage.setText("");
 					stdntTxt.setEditable(true);
-				}
-				else {
+				} else {
 					stdntMessage.setText("Only characrers and spaces are allowed!");
 					stdntTxt.setEditable(false);
 				}
-	
+
 			}
 		});
 		stdntTxt.setBounds(203, 246, 203, 28);
@@ -161,15 +156,15 @@ public class issueBook extends JFrame {
 		conTxt.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-											
-				if(Character.isDigit(e.getKeyChar()) || e.getKeyChar() == '+' || Character.isISOControl(e.getKeyChar())) {	
+
+				if (Character.isDigit(e.getKeyChar()) || e.getKeyChar() == '+'
+						|| Character.isISOControl(e.getKeyChar())) {
 					conMessage.setText("");
 					conTxt.setEditable(true);
-				}
-				else {
+				} else {
 					conMessage.setText("numbers only!");
 					conTxt.setEditable(false);
-				}					
+				}
 			}
 		});
 		conTxt.setBounds(203, 306, 203, 28);
@@ -180,51 +175,71 @@ public class issueBook extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Boolean found = false;
-
-				if (callTxt.getText().equals("") || stdTxt.getText().equals("")
-						|| stdntTxt.getText().equals("")
+				Boolean found1 = false;
+				if (callTxt.getText().equals("") || stdTxt.getText().equals("") || stdntTxt.getText().equals("")
 						|| conTxt.getText().equals("")) {
 					JOptionPane.showMessageDialog(null, "Please fill all Data!", "Message", JOptionPane.PLAIN_MESSAGE);
 				} else {
 					for (int i = 0; i < data.booksCount; i++) {
 						if (callTxt.getText().equals(data.books[i].getCallNo())) {
 							Integer x = data.books[i].getQuantity();
-								if (x < 1) {
+							if (x < 1) {
+								found = true;
+								JOptionPane.showMessageDialog(null, "Book Currently not available", "Message",
+										JOptionPane.PLAIN_MESSAGE);
+							}
+
+							else {
+								for (int j = 0; j < data.stdCount; j++) {
+									if (data.std[j].getId().equals(stdTxt.getText())
+											&& data.std[j].getName().equals(stdntTxt.getText())
+											&& data.std[j].getContact().equals(conTxt.getText())) {
+										if(data.std[j].getIss()  >= 3) {
+											JOptionPane.showMessageDialog(null, "Student can't borrow more boooks!", "Message",
+													JOptionPane.PLAIN_MESSAGE);
+											return;
+										}
+										else {
+										data.std[j].setIss(1);
+										found1 = true;}
+										
+									}
+								}
+								if (found1) {
+									int id;
+									if (data.issCount == 0) {
+										id = 1;
+									} else {
+										id = data.issBooks[data.issCount - 1].getId() + 1;
+									}
+
+									Date date = new Date();
+									SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
+									data.issBooks[data.issCount] = new issueBooks(id, callTxt.getText(),
+											stdTxt.getText(), stdntTxt.getText().trim(), conTxt.getText(),
+											format.format(date));
+
+									data.issCount++;
+
+									data.books[i].setQuantity(-1);
+									data.books[i].setIssued(1);
+									callTxt.setText("");
+									stdntTxt.setText("");
+									stdTxt.setText("");
+									conTxt.setText("");
+									data.updateissueData();
+									data.updateBookData();
+									data.updateStdData();
 									found = true;
-									JOptionPane.showMessageDialog(null, "Book Currently not available", "Message", JOptionPane.PLAIN_MESSAGE);
+									JOptionPane.showMessageDialog(null, "Book issued successfully!", "Message",
+											JOptionPane.PLAIN_MESSAGE);
 								}
 								else {
-									if(data.issCount == 0)
-										data.issBooks[data.issCount][0] = "1";
-										else {
-											Integer temp = Integer.parseInt(data.issBooks[data.issCount-1][0].toString()) + 1;
-											data.issBooks[data.issCount][0] = temp.toString();
-										}
-										
-										data.issBooks[data.issCount][1] = callTxt.getText();// book call number
-										data.issBooks[data.issCount][2] = stdTxt.getText();
-										data.issBooks[data.issCount][3] = stdntTxt.getText().trim();
-										data.issBooks[data.issCount][4] = conTxt.getText();
-										
-										Date date = new Date();
-										SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-										
-										data.issBooks[data.issCount][5] = format.format(date);
-										data.issCount++;
-
-										data.books[i].setQuantity(-1);
-										data.books[i].setIssued(1);
-										callTxt.setText("");
-										stdntTxt.setText("");
-										stdTxt.setText("");
-										conTxt.setText("");
-										data.updateissueData();
-										data.updateBookData();
-										found = true;
-										JOptionPane.showMessageDialog(null, "Book issued successfully!", "Message",
-												JOptionPane.PLAIN_MESSAGE);
+									JOptionPane.showMessageDialog(null, "wrong student information!", "Message",
+											JOptionPane.PLAIN_MESSAGE);
 								}
-							
+							}
 						}
 					}
 					if (!found) {
@@ -257,14 +272,13 @@ public class issueBook extends JFrame {
 		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_6.setBounds(111, 10, 295, 37);
 		contentPane.add(lblNewLabel_6);
-		
-		JLabel lblNewLabel = new JLabel("Notify student that returns after more than two days will be charged 2$ per extra day!!");
+
+		JLabel lblNewLabel = new JLabel(
+				"Notify student that returns after more than two days will be charged 2$ per extra day!!");
 		lblNewLabel.setForeground(Color.RED);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNewLabel.setBounds(12, 352, 534, 53);
 		contentPane.add(lblNewLabel);
-		
-		
 
 		setLocation(new Point(500, 100));
 	}

@@ -29,7 +29,7 @@ public class viewIssuedBooks extends JFrame {
 	public void AddIssuedBook(Data data) {
 		DefaultTableModel model = (DefaultTableModel) issbooktable.getModel();
 		for (int i = 0; i < data.issCount; i++) {
-			model.addRow(data.issBooks[i]);
+			model.addRow(data.issBooks[i].getAll());
 		}
 	}
 

@@ -43,22 +43,7 @@ public class librarian {
 		return password;
 	}
 	
-	//  get password method
-	public String getEmail() {
-		return email;
-	}
-	
-	public String getAddress() {
-		return address;
-	}
-	
-	public String getCity() {
-		return city;
-	}
-	
-	public String getContact() {
-		return contact;
-	}
+
 	
 	public String[] getAll() {
 		String[] all = {this.id, this.name, this.password, this.email, this.address, this.city, this.contact};
