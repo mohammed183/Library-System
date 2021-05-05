@@ -65,23 +65,109 @@ public class issueBook extends JFrame {
 		idM.setForeground(Color.RED);
 		idM.setBounds(203, 97, 203, 13);
 		contentPane.add(idM);
+		
+		JLabel callMessage = new JLabel("");
+		callMessage.setForeground(Color.RED);
+		callMessage.setFont(new Font("Tahoma", Font.PLAIN, 8));
+		callMessage.setBounds(203, 164, 203, 13);
+		contentPane.add(callMessage);
+		
+		JLabel stdMessage = new JLabel("");
+		stdMessage.setForeground(Color.RED);
+		stdMessage.setFont(new Font("Tahoma", Font.PLAIN, 8));
+		stdMessage.setBounds(203, 223, 203, 13);
+		contentPane.add(stdMessage);
+		
+		JLabel stdntMessage = new JLabel("");
+		stdntMessage.setForeground(Color.RED);
+		stdntMessage.setFont(new Font("Tahoma", Font.PLAIN, 8));
+		stdntMessage.setBounds(203, 283, 203, 13);
+		contentPane.add(stdntMessage);
+		
+		JLabel conMessage = new JLabel("");
+		conMessage.setForeground(Color.RED);
+		conMessage.setFont(new Font("Tahoma", Font.PLAIN, 8));
+		conMessage.setBounds(203, 344, 203, 13);
+		contentPane.add(conMessage);
 
 		callTxt = new JTextField();
+		callTxt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if(Character.isDigit(e.getKeyChar()) || Character.isISOControl(e.getKeyChar())) {
+					callMessage.setText("");
+					callTxt.setEditable(true);
+
+				}
+				else {
+					callTxt.setEditable(false);
+					callMessage.setText("numbers only!");				
+				}
+			}
+		});
 		callTxt.setBounds(203, 129, 203, 28);
 		contentPane.add(callTxt);
 		callTxt.setColumns(10);
 
 		stdTxt = new JTextField();
+		stdTxt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+
+				if(Character.isDigit(e.getKeyChar()) || Character.isISOControl(e.getKeyChar())) {
+					stdMessage.setText("");
+					stdTxt.setEditable(true);
+
+				}
+				else {
+					stdTxt.setEditable(false);
+					stdMessage.setText("numbers only!");				
+				}
+			
+				
+		
+				
+			}
+		});
 		stdTxt.setBounds(203, 187, 203, 28);
 		contentPane.add(stdTxt);
 		stdTxt.setColumns(10);
 
 		stdntTxt = new JTextField();
+		stdntTxt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(Character.isLetter(e.getKeyChar()) || Character.isWhitespace(e.getKeyChar()) || Character.isISOControl(e.getKeyChar())) {
+					stdntMessage.setText("");
+					stdntTxt.setEditable(true);
+				}
+				else {
+					stdntMessage.setText("Only characrers and spaces are allowed!");
+					stdntTxt.setEditable(false);
+				}
+	
+			}
+		});
 		stdntTxt.setBounds(203, 246, 203, 28);
 		contentPane.add(stdntTxt);
 		stdntTxt.setColumns(10);
 
 		conTxt = new JTextField();
+		conTxt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+											
+				if(Character.isDigit(e.getKeyChar()) || e.getKeyChar() == '+' || Character.isISOControl(e.getKeyChar())) {	
+					conMessage.setText("");
+					conTxt.setEditable(true);
+				}
+				else {
+					conMessage.setText("numbers only!");
+					conTxt.setEditable(false);
+				}					
+			}
+		});
 		conTxt.setBounds(203, 306, 203, 28);
 		contentPane.add(conTxt);
 		conTxt.setColumns(10);
@@ -108,7 +194,7 @@ public class issueBook extends JFrame {
 							
 							data.issBooks[data.issCount][1] = callTxt.getText();// book call number
 							data.issBooks[data.issCount][2] = stdTxt.getText();
-							data.issBooks[data.issCount][3] = stdntTxt.getText();
+							data.issBooks[data.issCount][3] = stdntTxt.getText().trim();
 							data.issBooks[data.issCount][4] = conTxt.getText();
 							
 							Date date = new Date();
@@ -166,8 +252,10 @@ public class issueBook extends JFrame {
 		JLabel lblNewLabel = new JLabel("Notify student that returns after more than two days will be charged 2$ per extra day!!");
 		lblNewLabel.setForeground(Color.RED);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel.setBounds(45, 344, 534, 53);
+		lblNewLabel.setBounds(12, 352, 534, 53);
 		contentPane.add(lblNewLabel);
+		
+		
 
 		setLocation(new Point(500, 100));
 	}

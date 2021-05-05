@@ -44,7 +44,7 @@ public class AddLibrarian extends JFrame {
 	private JLabel contactmessage;
 	
 	
-	public static boolean isValid(String email)
+	public static boolean isValid(String email)// email validation function
 	{
 		String emailRegex = "^[a-zA-Z0-9_+&*-\\.]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
 
@@ -225,11 +225,11 @@ public class AddLibrarian extends JFrame {
 				}
 				else {
 					data.lib[data.libCount][0] = idText.getText();
-					data.lib[data.libCount][1] = nametext.getText();
+					data.lib[data.libCount][1] = nametext.getText().trim();
 					data.lib[data.libCount][2] = passwordtext.getText();
 					data.lib[data.libCount][3] = emailtext.getText();
-					data.lib[data.libCount][4] = addresstext.getText();
-					data.lib[data.libCount][5] = citytext.getText();
+					data.lib[data.libCount][4] = addresstext.getText().trim();
+					data.lib[data.libCount][5] = citytext.getText().trim();
 					data.lib[data.libCount][6] = contacttext.getText();
 					data.libCount++;
 

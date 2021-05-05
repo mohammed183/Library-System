@@ -79,7 +79,7 @@ public class Data {
 			FileWriter fw = new FileWriter("lib.txt");
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter pw = new PrintWriter(bw);
-
+			
 			//pw.println("Id,Name,Password,Email,Address,City,Contact");
 			for (int i = 0; i < libCount; i++) {
 
@@ -92,11 +92,9 @@ public class Data {
 			// TODO: handle exception
 		}
 	}
-
 	
 	
-	
-	
+		
 	
 	public void updateBookData() {
 		try {
@@ -114,7 +112,6 @@ public class Data {
 			// TODO: handle exception
 		}
 	}
-
 	
 	
 	
@@ -126,10 +123,10 @@ public class Data {
 			FileWriter fw = new FileWriter("issued.txt");
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter pw = new PrintWriter(bw);
-
+			
 			//pw.println("Id,Name,Password,Email,Address,City,Contact");
 			for (int i = 0; i < issCount; i++) {
-
+				
 				pw.println(issBooks[i][0] + "," + issBooks[i][1] + "," + issBooks[i][2] + "," + issBooks[i][3] + "," + issBooks[i][4] + ","
 						+ issBooks[i][5]);
 				pw.flush();
@@ -139,18 +136,17 @@ public class Data {
 			// TODO: handle exception
 		}
 	}
-
+	
 	public static void main(String[] argv) {
-
+		
 		Data data = new Data();
 		
 		
 		data.addAdmin("admin", "admin");
 		data.readData();
-
+		
 		LibraryManagement open = new LibraryManagement(data);
 		open.setVisible(true);
-
+		
 	}
-
 }

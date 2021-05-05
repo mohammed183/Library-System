@@ -12,12 +12,17 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
+import javax.swing.JLabel;
+import java.awt.Color;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 
 public class ReturnBook extends javax.swing.JFrame {
 
 
     public ReturnBook(Data data) {
+    	setTitle("Return borrowed book");
     	setPreferredSize(new Dimension(560, 530));
     	setLocation(new Point(500, 100));
     	setResizable(false);
@@ -27,6 +32,20 @@ public class ReturnBook extends javax.swing.JFrame {
     private void initComponents(Data data) {
 
         bookCallText = new javax.swing.JTextField();
+        bookCallText.addKeyListener(new KeyAdapter() {
+        	@Override
+        	public void keyPressed(KeyEvent e) {
+        		
+        		if(Character.isDigit(e.getKeyChar()) || Character.isISOControl(e.getKeyChar())) {
+        			bookCallMessage.setText("");
+					bookCallText.setEditable(true);
+
+				}
+				else {
+					bookCallText.setEditable(false);
+					bookCallMessage.setText("numbers only!");}
+        		}     	
+        });
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -34,6 +53,20 @@ public class ReturnBook extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         studentIdText = new javax.swing.JTextField();
+        studentIdText.addKeyListener(new KeyAdapter() {
+        	@Override
+        	public void keyPressed(KeyEvent e) {
+        		
+        		if(Character.isDigit(e.getKeyChar()) || Character.isISOControl(e.getKeyChar())) {
+        			studentIdMessage.setText("");
+					studentIdText.setEditable(true);
+				}
+				else {
+					studentIdText.setEditable(false);
+					studentIdMessage.setText("numbers only!");
+					}		
+        	}
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,38 +110,52 @@ public class ReturnBook extends javax.swing.JFrame {
                 jTextField2ActionPerformed(evt);
             }
         });
+        
+        bookCallMessage = new JLabel("");
+        bookCallMessage.setForeground(Color.RED);
+        bookCallMessage.setFont(new Font("Tahoma", Font.PLAIN, 8));
+        
+        studentIdMessage = new JLabel("");
+        studentIdMessage.setForeground(Color.RED);
+        studentIdMessage.setFont(new Font("Tahoma", Font.PLAIN, 8));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         layout.setHorizontalGroup(
-        	layout.createParallelGroup(Alignment.TRAILING)
-        		.addGroup(Alignment.LEADING, layout.createSequentialGroup()
-        			.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
-        				.addGroup(layout.createSequentialGroup()
-        					.addGap(32)
-        					.addComponent(jLabel1)
-        					.addGap(50))
-        				.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-        					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        						.addComponent(jLabel3)
-        						.addComponent(jLabel2))
-        					.addGap(66)))
-        			.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
-        				.addComponent(studentIdText)
-        				.addComponent(bookCallText, GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
-        			.addContainerGap(167, Short.MAX_VALUE))
+        	layout.createParallelGroup(Alignment.LEADING)
         		.addGroup(layout.createSequentialGroup()
         			.addContainerGap(206, Short.MAX_VALUE)
         			.addComponent(jLabel4)
         			.addGap(199))
-        		.addGroup(Alignment.LEADING, layout.createSequentialGroup()
+        		.addGroup(layout.createSequentialGroup()
         			.addGap(214)
         			.addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
         			.addContainerGap(234, Short.MAX_VALUE))
-        		.addGroup(Alignment.LEADING, layout.createSequentialGroup()
+        		.addGroup(layout.createSequentialGroup()
         			.addContainerGap()
         			.addComponent(jButton2, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
         			.addContainerGap(459, Short.MAX_VALUE))
+        		.addGroup(layout.createSequentialGroup()
+        			.addContainerGap(32, Short.MAX_VALUE)
+        			.addGroup(layout.createParallelGroup(Alignment.TRAILING, false)
+        				.addGroup(layout.createSequentialGroup()
+        					.addComponent(jLabel1)
+        					.addGap(50))
+        				.addGroup(layout.createSequentialGroup()
+        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(jLabel3)
+        						.addComponent(jLabel2))
+        					.addGap(66)))
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(layout.createSequentialGroup()
+        					.addComponent(studentIdMessage, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
+        					.addContainerGap())
+        				.addGroup(layout.createSequentialGroup()
+        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(bookCallMessage, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        						.addGroup(layout.createParallelGroup(Alignment.TRAILING, false)
+        							.addComponent(studentIdText, Alignment.LEADING)
+        							.addComponent(bookCallText, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)))
+        					.addContainerGap(167, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
         	layout.createParallelGroup(Alignment.LEADING)
@@ -119,11 +166,15 @@ public class ReturnBook extends javax.swing.JFrame {
         			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(bookCallText, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
         				.addComponent(jLabel2))
-        			.addGap(65)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(bookCallMessage, GroupLayout.PREFERRED_SIZE, 11, GroupLayout.PREFERRED_SIZE)
+        			.addGap(35)
         			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(studentIdText, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
         				.addComponent(jLabel3))
-        			.addPreferredGap(ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(studentIdMessage, GroupLayout.PREFERRED_SIZE, 11, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
         			.addComponent(jLabel1)
         			.addGap(7)
         			.addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
@@ -135,7 +186,6 @@ public class ReturnBook extends javax.swing.JFrame {
 
         pack();
     }
-
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {}
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt, Data data) {
@@ -144,7 +194,6 @@ public class ReturnBook extends javax.swing.JFrame {
 		x.setVisible(true);
 		this.setVisible(false);	
     }
-
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {}
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt, Data data) {
@@ -210,5 +259,7 @@ public class ReturnBook extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField bookCallText;
     private javax.swing.JTextField studentIdText;
+    private JLabel bookCallMessage;
+    private JLabel studentIdMessage;
 
 }
