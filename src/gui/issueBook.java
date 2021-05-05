@@ -184,34 +184,40 @@ public class issueBook extends JFrame {
 				} else {
 					for (int i = 0; i < data.count; i++) {
 						if (callTxt.getText().equals(data.books[i][0])) {
+							Integer x = Integer.parseInt((String) data.books[i][4]);
+								if (x < 1) {
+									JOptionPane.showMessageDialog(null, "Book Currently not available", "Message", JOptionPane.PLAIN_MESSAGE);
+								}
+								else {
+									if(data.issCount == 0)
+										data.issBooks[data.issCount][0] = "1";
+										else {
+											Integer temp = Integer.parseInt(data.issBooks[data.issCount-1][0].toString()) + 1;
+											data.issBooks[data.issCount][0] = temp.toString();
+										}
+										
+										data.issBooks[data.issCount][1] = callTxt.getText();// book call number
+										data.issBooks[data.issCount][2] = stdTxt.getText();
+										data.issBooks[data.issCount][3] = stdntTxt.getText().trim();
+										data.issBooks[data.issCount][4] = conTxt.getText();
+										
+										Date date = new Date();
+										SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+										
+										data.issBooks[data.issCount][5] = format.format(date);
+										data.issCount++;
 
-							if(data.issCount == 0)
-							data.issBooks[data.issCount][0] = "1";
-							else {
-								Integer temp = Integer.parseInt(data.issBooks[data.issCount-1][0].toString()) + 1;
-								data.issBooks[data.issCount][0] = temp.toString();
-							}
+										Integer temp = Integer.parseInt(data.books[i][4].toString()) -  1;
+										data.books[i][4] = temp.toString();
+										callTxt.setText("");
+										stdntTxt.setText("");
+										stdTxt.setText("");
+										conTxt.setText("");
+										data.updateissueData();
+										data.updateBookData();
+										found = true;
+								}
 							
-							data.issBooks[data.issCount][1] = callTxt.getText();// book call number
-							data.issBooks[data.issCount][2] = stdTxt.getText();
-							data.issBooks[data.issCount][3] = stdntTxt.getText().trim();
-							data.issBooks[data.issCount][4] = conTxt.getText();
-							
-							Date date = new Date();
-							SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-							
-							data.issBooks[data.issCount][5] = format.format(date);
-							data.issCount++;
-
-							Integer temp = Integer.parseInt(data.books[i][4].toString()) -  1;
-							data.books[i][4] = temp.toString();
-							callTxt.setText("");
-							stdntTxt.setText("");
-							stdTxt.setText("");
-							conTxt.setText("");
-							data.updateissueData();
-							data.updateBookData();
-							found = true;
 						}
 					}
 					if (found) {
