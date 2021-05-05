@@ -14,7 +14,7 @@ public class ViewBooks extends javax.swing.JFrame {
 
 	public ViewBooks(Data data) {
 		setResizable(false);
-		setPreferredSize(new Dimension(736, 530));
+		setPreferredSize(new Dimension(800, 530));
 		setTitle("Books");
 		initComponents(data);
 		AddBooks(data);
@@ -22,8 +22,8 @@ public class ViewBooks extends javax.swing.JFrame {
 
 	public void AddBooks(Data data) {
 		DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-		for (int i = 0; i < data.count; i++) {
-			model.addRow(data.books[i]);
+		for (int i = 0; i < data.booksCount; i++) {
+			model.addRow(data.books[i].getAll());
 		}
 	}
 
@@ -36,21 +36,13 @@ public class ViewBooks extends javax.swing.JFrame {
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
 		jTable1.setForeground(new java.awt.Color(51, 0, 51));
-		jTable1.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
-
-		}, new String[] { "Call No:", "Name: ", "Author:", "Publisher:", "Quantity:" }) {
-			Class[] types = new Class[] { java.lang.String.class, java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.Integer.class };
-			boolean[] canEdit = new boolean[] { false, false, false, false, false };
-
-			public Class getColumnClass(int columnIndex) {
-				return types[columnIndex];
+		jTable1.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Call No:", "Name: ", "Author:", "Publisher:", "Quantity:", "Issued:", "Added Date:"
 			}
-
-			public boolean isCellEditable(int rowIndex, int columnIndex) {
-				return canEdit[columnIndex];
-			}
-		});
+		));
 		jTable1.setToolTipText("");
 		jTable1.setGridColor(new java.awt.Color(0, 0, 0));
 		jScrollPane1.setViewportView(jTable1);
@@ -67,22 +59,20 @@ public class ViewBooks extends javax.swing.JFrame {
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		layout.setHorizontalGroup(
-			layout.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 702, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
+			layout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(layout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(617, Short.MAX_VALUE))
+					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+						.addComponent(jScrollPane1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		layout.setVerticalGroup(
 			layout.createParallelGroup(Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 336, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
 					.addComponent(btnNewButton)
 					.addContainerGap())
 		);

@@ -9,10 +9,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class Data {
-
-	public Object[][] books = new Object[30][5];
-	public int count = 0;
-
+	
+	books[] books = new books[30];
+	int booksCount = 0;
+	
 	public Object[][] lib = new Object[30][7];
 	public int libCount = 0;
 
@@ -34,8 +34,9 @@ public class Data {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(path));
 			while ((line = br.readLine()) != null) {
-				this.books[this.count] = line.split(",");
-				this.count++;
+				String[] values = line.split(",");
+				books[booksCount] = new books(values[0] , values[1], values[2], values[3], Integer.parseInt(values[4]), Integer.parseInt(values[5]), values[6]);
+				booksCount++;
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -100,9 +101,9 @@ public class Data {
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter pw = new PrintWriter(bw);
 			//pw.println("Call No,Name,Author,Pubisher,Qyantity");
-			for (int i = 0; i < count; i++) {
-
-				pw.println(books[i][0] + "," + books[i][1] + "," + books[i][2] + "," + books[i][3] + "," + books[i][4]);
+			for (int i = 0; i < booksCount; i++) {
+				Object[] temp = books[i].getAll();
+				pw.println(temp[0] + "," + temp[1] + "," + temp[2] + "," + temp[3] + "," + temp[4] + "," + temp[5] + "," + temp[6]);
 				pw.flush();
 			}
 			pw.close();

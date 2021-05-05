@@ -186,9 +186,9 @@ public class issueBook extends JFrame {
 						|| conTxt.getText().equals("")) {
 					JOptionPane.showMessageDialog(null, "Please fill all Data!", "Message", JOptionPane.PLAIN_MESSAGE);
 				} else {
-					for (int i = 0; i < data.count; i++) {
-						if (callTxt.getText().equals(data.books[i][0])) {
-							Integer x = Integer.parseInt((String) data.books[i][4]);
+					for (int i = 0; i < data.booksCount; i++) {
+						if (callTxt.getText().equals(data.books[i].getCallNo())) {
+							Integer x = data.books[i].getQuantity();
 								if (x < 1) {
 									found = true;
 									JOptionPane.showMessageDialog(null, "Book Currently not available", "Message", JOptionPane.PLAIN_MESSAGE);
@@ -212,8 +212,8 @@ public class issueBook extends JFrame {
 										data.issBooks[data.issCount][5] = format.format(date);
 										data.issCount++;
 
-										Integer temp = Integer.parseInt(data.books[i][4].toString()) -  1;
-										data.books[i][4] = temp.toString();
+										data.books[i].setQuantity(-1);
+										data.books[i].setIssued(1);
 										callTxt.setText("");
 										stdntTxt.setText("");
 										stdTxt.setText("");

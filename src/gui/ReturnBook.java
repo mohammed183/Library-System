@@ -203,12 +203,12 @@ public class ReturnBook extends javax.swing.JFrame {
     		
     		if(bookCallText.getText().equals(data.issBooks[i][1]) && studentIdText.getText().equals(data.issBooks[i][2])) {
     			int index = -1;
-    			for (int j = 0; j < data.count; j++) {
-    				if (data.issBooks[i][1].equals(data.books[j][0]) )
+    			for (int j = 0; j < data.booksCount; j++) {
+    				if (data.issBooks[i][1].equals(data.books[j].getCallNo()) )
     	    			index = j;
     			}
-    			Integer temp=Integer.parseInt(data.books[index][4].toString()) + 1;
-    			data.books[index][4] =(temp.toString() );
+    			data.books[index].setIssued(-1);
+    			data.books[index].setQuantity(1);
     			index = 0;
     			int count = 0;
     			while (index < data.issCount) {
