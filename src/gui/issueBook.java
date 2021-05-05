@@ -186,6 +186,7 @@ public class issueBook extends JFrame {
 						if (callTxt.getText().equals(data.books[i][0])) {
 							Integer x = Integer.parseInt((String) data.books[i][4]);
 								if (x < 1) {
+									found = true;
 									JOptionPane.showMessageDialog(null, "Book Currently not available", "Message", JOptionPane.PLAIN_MESSAGE);
 								}
 								else {
@@ -216,19 +217,17 @@ public class issueBook extends JFrame {
 										data.updateissueData();
 										data.updateBookData();
 										found = true;
+										JOptionPane.showMessageDialog(null, "Book issued successfully!", "Message",
+												JOptionPane.PLAIN_MESSAGE);
 								}
 							
 						}
 					}
-					if (found) {
-						JOptionPane.showMessageDialog(null, "Book issued successfully!", "Message",
-								JOptionPane.PLAIN_MESSAGE);
-					}
-
-					else {
+					if (!found) {
 						JOptionPane.showMessageDialog(null, "wrong Book Call No!! ", "Message",
 								JOptionPane.PLAIN_MESSAGE);
 					}
+
 				}
 			}
 		});
