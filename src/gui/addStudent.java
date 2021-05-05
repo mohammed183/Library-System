@@ -23,7 +23,7 @@ import java.awt.event.KeyEvent;
 import java.io.CharConversionException;
 import java.util.regex.Pattern;
 
-public class AddLibrarian extends JFrame {
+public class addStudent extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField nametext;
@@ -52,11 +52,11 @@ public class AddLibrarian extends JFrame {
 		return Pattern.matches(emailRegex, email);
 	}
 
-	public AddLibrarian(Data data) {
+	public addStudent(Data data) {
 
 		setPreferredSize(new Dimension(560, 530));
 
-		setTitle("Add Librarian");
+		setTitle("Add Student");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 560, 530);
@@ -66,7 +66,7 @@ public class AddLibrarian extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("Add Librarian");
+		JLabel lblNewLabel = new JLabel("Add Student");
 		lblNewLabel.setForeground(Color.GRAY);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -211,7 +211,7 @@ public class AddLibrarian extends JFrame {
 		contacttext.setBounds(175, 407, 212, 24);
 		contentPane.add(contacttext);
 
-		btnNewButton = new JButton("Add Librarian");
+		btnNewButton = new JButton("Add ");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -224,18 +224,18 @@ public class AddLibrarian extends JFrame {
 							JOptionPane.PLAIN_MESSAGE);
 				} else {
 					Boolean valid = true;
-					for (int i = 0; i < data.libCount; i++) {
-						if (data.lib[i].getId().equals(idText.getText())) {
+					for (int i = 0; i < data.stdCount; i++) {
+						if (data.std[i].getId().equals(idText.getText())) {
 							valid = false;
 							JOptionPane.showMessageDialog(null, "ID already taken", "Message",
 									JOptionPane.PLAIN_MESSAGE);
 						}
 					}
 					if (valid) {
-						data.lib[data.libCount] = new librarian(idText.getText(), nametext.getText().trim(), passwordtext.getText(),
-								emailText.getText(), addresstext.getText().trim(), citytext.getText().trim(), contacttext.getText());
-						data.libCount++;
-						data.updateLibData();
+						data.std[data.stdCount] = new student(idText.getText(), nametext.getText().trim(), passwordtext.getText(),
+								emailText.getText(), addresstext.getText().trim(), citytext.getText().trim(), contacttext.getText(), 0);
+						data.stdCount++;
+						data.updateStdData();
 
 						idText.setText("");
 						nametext.setText("");
@@ -244,9 +244,9 @@ public class AddLibrarian extends JFrame {
 						addresstext.setText("");
 						citytext.setText("");
 						contacttext.setText("");
-						JOptionPane.showMessageDialog(null, "Librarian added successfully!", "Message",
+						JOptionPane.showMessageDialog(null, "Student added successfully!", "Message",
 								JOptionPane.PLAIN_MESSAGE);
-
+						
 					}
 				}
 			}
@@ -260,7 +260,7 @@ public class AddLibrarian extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				AdminSection x = new AdminSection(data);
 				x.setVisible(true);
-				AddLibrarian.this.setVisible(false);
+				addStudent.this.setVisible(false);
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 10));

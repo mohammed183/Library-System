@@ -1,6 +1,6 @@
 package gui;
 
-public class librarian {
+public class student {
 	
 	private String id;
 	
@@ -16,10 +16,13 @@ public class librarian {
 	
 	private String contact;
 	
+	private Integer issBooks = 0;
+	
+	
 	public int count = 0;
 	
-	public librarian(String id, String name, String password, String email, String address, String city, String contact) {
-		
+	public student(String id, String name, String password, String email, String address, String city, String contact, Integer issBook) {
+		this.issBooks = issBook;
 		this.id = id;
 		this.name = name;
 		this.password = password;
@@ -29,6 +32,14 @@ public class librarian {
 		this.contact = contact;
 	}
 	
+	int getIss() {
+		return this.issBooks;
+	}
+	
+	void setIss(int x) {
+		this.issBooks += x;
+	}
+
 	//  get Id method
 	public String getId() {
 		return id;
@@ -60,8 +71,8 @@ public class librarian {
 		return contact;
 	}
 	
-	public String[] getAll() {
-		String[] all = {this.id, this.name, this.password, this.email, this.address, this.city, this.contact};
+	public Object[] getAll() {
+		Object[] all = {this.id, this.name, this.password, this.email, this.address, this.city, this.contact, this.issBooks};
 		return all;
 	}
 	

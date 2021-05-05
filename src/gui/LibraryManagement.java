@@ -10,6 +10,9 @@ import java.awt.SystemColor;
 import java.awt.Dimension;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JButton;
 
 
 public class LibraryManagement extends javax.swing.JFrame {
@@ -100,31 +103,49 @@ public class LibraryManagement extends javax.swing.JFrame {
 
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton4.setText("Libriaran Login");
+        
+        JButton btnStudentLogin = new JButton();
+        btnStudentLogin.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		studentLoginForm admin = new studentLoginForm(data);
+                admin.setVisible(true);
+                LibraryManagement.this.setVisible(false);
+        	}
+        });
+        btnStudentLogin.setText("Student Login");
+        btnStudentLogin.setFont(new Font("Tahoma", Font.BOLD, 14));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         layout.setHorizontalGroup(
-        	layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-        			.addContainerGap(120, Short.MAX_VALUE)
+        	layout.createParallelGroup(Alignment.TRAILING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addContainerGap(150, Short.MAX_VALUE)
         			.addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 288, GroupLayout.PREFERRED_SIZE)
         			.addGap(118))
-        		.addGroup(layout.createSequentialGroup()
+        		.addGroup(Alignment.LEADING, layout.createSequentialGroup()
         			.addGap(148)
         			.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        				.addComponent(jButton3, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
-        				.addComponent(jButton4, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))
-        			.addGap(149))
+        				.addGroup(layout.createSequentialGroup()
+        					.addComponent(btnStudentLogin, GroupLayout.PREFERRED_SIZE, 259, GroupLayout.PREFERRED_SIZE)
+        					.addContainerGap())
+        				.addGroup(layout.createSequentialGroup()
+        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(jButton4, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+        						.addComponent(jButton3, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE))
+        					.addGap(149))))
         );
         layout.setVerticalGroup(
         	layout.createParallelGroup(Alignment.LEADING)
         		.addGroup(layout.createSequentialGroup()
         			.addGap(33)
         			.addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
-        			.addGap(90)
+        			.addGap(60)
         			.addComponent(jButton3, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
-        			.addGap(65)
+        			.addGap(54)
         			.addComponent(jButton4, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-        			.addContainerGap(195, Short.MAX_VALUE))
+        			.addGap(52)
+        			.addComponent(btnStudentLogin, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(99, Short.MAX_VALUE))
         );
         getContentPane().setLayout(layout);
 
@@ -182,5 +203,4 @@ public class LibraryManagement extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JLabel jLabel1;
-    // End of variables declaration//GEN-END:variables
 }

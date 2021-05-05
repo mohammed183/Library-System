@@ -4,6 +4,10 @@ import java.awt.Dimension;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JButton;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AdminSection extends javax.swing.JFrame {
 
@@ -62,21 +66,32 @@ public class AdminSection extends javax.swing.JFrame {
 		jLabel1.setForeground(new java.awt.Color(102, 102, 102));
 		jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		jLabel1.setText("Admin Section");
+		
+		JButton btnNewButton = new JButton("Add Student");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				addStudent x = new addStudent(data);
+				x.setVisible(true);
+				AdminSection.this.setVisible(false);
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		layout.setHorizontalGroup(
 			layout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(layout.createSequentialGroup()
 					.addContainerGap(163, Short.MAX_VALUE)
-					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+					.addGroup(layout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(layout.createSequentialGroup()
-							.addGroup(layout.createParallelGroup(Alignment.LEADING)
-								.addComponent(jButton4, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE)
-								.addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE)
-								.addComponent(jButton2, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE)
-								.addComponent(jButton3, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE))
+							.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(jButton1, GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+								.addComponent(jButton2, GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+								.addComponent(jButton3, GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+								.addComponent(jButton4, GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+								.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 							.addGap(134))
-						.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+						.addGroup(layout.createSequentialGroup()
 							.addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 206, GroupLayout.PREFERRED_SIZE)
 							.addGap(142))))
 		);
@@ -87,13 +102,15 @@ public class AdminSection extends javax.swing.JFrame {
 					.addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
 					.addGap(37)
 					.addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-					.addGap(57)
+					.addGap(29)
 					.addComponent(jButton2, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-					.addGap(47)
+					.addGap(27)
 					.addComponent(jButton3, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-					.addGap(49)
+					.addGap(32)
+					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+					.addGap(28)
 					.addComponent(jButton4, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(101, Short.MAX_VALUE))
+					.addContainerGap(91, Short.MAX_VALUE))
 		);
 		getContentPane().setLayout(layout);
 		pack();
