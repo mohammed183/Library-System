@@ -25,7 +25,6 @@ import java.util.Date;
 public class issueBook extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField idTxt;
 	private JTextField callTxt;
 	private JTextField stdTxt;
 	private JTextField stdntTxt;
@@ -41,11 +40,6 @@ public class issueBook extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		JLabel lblNewLabel = new JLabel("ID:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNewLabel.setBounds(45, 71, 115, 28);
-		contentPane.add(lblNewLabel);
 
 		JLabel lblNewLabel_1 = new JLabel("Book Call No:");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -72,25 +66,6 @@ public class issueBook extends JFrame {
 		idM.setBounds(203, 97, 203, 13);
 		contentPane.add(idM);
 
-		idTxt = new JTextField();
-		idTxt.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-
-				if (Character.isDigit(e.getKeyChar()) || Character.isISOControl(e.getKeyChar())) {
-					idM.setText("");
-					idTxt.setEditable(true);
-				} else {
-					idTxt.setEditable(false);
-					idM.setText("numbers only!");
-				}
-
-			}
-		});
-		idTxt.setBounds(203, 71, 203, 28);
-		contentPane.add(idTxt);
-		idTxt.setColumns(10);
-
 		callTxt = new JTextField();
 		callTxt.setBounds(203, 129, 203, 28);
 		contentPane.add(callTxt);
@@ -116,7 +91,7 @@ public class issueBook extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Boolean found = false;
 
-				if (idTxt.getText().equals("") || callTxt.getText().equals("") || stdTxt.getText().equals("")
+				if (callTxt.getText().equals("") || stdTxt.getText().equals("")
 						|| stdntTxt.getText().equals("")
 						|| conTxt.getText().equals("")) {
 					JOptionPane.showMessageDialog(null, "Please fill all Data!", "Message", JOptionPane.PLAIN_MESSAGE);
@@ -187,6 +162,12 @@ public class issueBook extends JFrame {
 		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_6.setBounds(111, 10, 295, 37);
 		contentPane.add(lblNewLabel_6);
+		
+		JLabel lblNewLabel = new JLabel("Notify student that returns after more than two days will be charged 2$ per extra day!!");
+		lblNewLabel.setForeground(Color.RED);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel.setBounds(45, 344, 534, 53);
+		contentPane.add(lblNewLabel);
 
 		setLocation(new Point(500, 100));
 	}

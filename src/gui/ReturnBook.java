@@ -2,6 +2,11 @@ package gui;
 
 import javax.swing.JOptionPane;
 import java.awt.Point;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.awt.Dimension;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
@@ -144,25 +149,56 @@ public class ReturnBook extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt, Data data) {
     	
-    	int newCount = data.issCount;
-    	data.issCount =0;
-    	for(int i = 0; i < newCount; i++) {
+    	Boolean found = false;
+    	for(int i = 0; i < data.issCount; i++) {
     		
     		if(bookCallText.getText().equals(data.issBooks[i][1]) && studentIdText.getText().equals(data.issBooks[i][2])) {
-    			System.out.println(data.books[i][4].toString());
-    			Integer temp=Integer.parseInt(data.books[i][4].toString()) + 1;
-    			data.books[i][4] =(temp.toString() );
+    			int index = -1;
+    			for (int j = 0; j < data.count; j++) {
+    				if (data.issBooks[i][1].equals(data.books[j][0]) )
+    	    			index = j;
+    			}
+    			Integer temp=Integer.parseInt(data.books[index][4].toString()) + 1;
+    			data.books[index][4] =(temp.toString() );
+    			index = 0;
+    			int count = 0;
+    			while (index < data.issCount) {
+    				if(index == i) {
+    					index++;
+    					continue;
+    				}
+    				data.issBooks[count] = data.issBooks[index];
+    				index++;
+    				count++;
+    			}
+    			
+    			Date reDate = new Date();
+    			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    			Date issDate = null;
+				try {
+					issDate = format.parse((String) data.issBooks[i][5]);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}    			
+				
+    			data.issCount--;
     			data.updateBookData();
     			data.updateissueData();
+    			
+				long diff = reDate.getTime() - issDate.getTime(); 
+				int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+				found = true;
+				System.out.println(days);
+				
+				if(days > 2) {
+					JOptionPane.showMessageDialog(null, "Late return fee should be paid: " + ((days - 2)*2)+ "$", "Message",JOptionPane.PLAIN_MESSAGE);
+				}
     			JOptionPane.showMessageDialog(null, "Book returned successfully!", "Message",JOptionPane.PLAIN_MESSAGE);
     			continue;
     		}
-    		else {
-    			data.issBooks[data.issCount] = data.issBooks[i];
-    			data.issCount++;
-    		}
     	}
-    	  if(newCount == data.issCount) {  	
+    	  if(!found) {  	
     	JOptionPane.showMessageDialog(null, "Sorry, unable to return book!", "Message",JOptionPane.PLAIN_MESSAGE);
     	}
     }

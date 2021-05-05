@@ -21,6 +21,7 @@ import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.CharConversionException;
+import java.util.regex.Pattern;
 
 public class AddLibrarian extends JFrame {
 
@@ -41,6 +42,16 @@ public class AddLibrarian extends JFrame {
 	private JLabel addressmessage;
 	private JLabel citymessage;
 	private JLabel contactmessage;
+	
+	
+	public static boolean isValid(String email)
+	{
+		String emailRegex = "^[a-zA-Z0-9_+&*-\\.]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+
+		if (email == null)
+			return false;
+		return Pattern.matches(emailRegex, email);
+	}
 
 	public AddLibrarian(Data data) {
 		
@@ -52,6 +63,7 @@ public class AddLibrarian extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 560, 530);
 		contentPane = new JPanel();
+		contentPane.setForeground(Color.BLACK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -92,6 +104,7 @@ public class AddLibrarian extends JFrame {
 		contentPane.add(lblNewLabel_1_1);
 
 		emailtext = new JTextField();
+		emailtext.setCaretColor(Color.BLACK);
 		emailtext.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
 				
@@ -206,7 +219,11 @@ public class AddLibrarian extends JFrame {
 						|| addresstext.getText().equals("") || citytext.getText().equals("")
 						|| contacttext.getText().equals("")) {
 					JOptionPane.showMessageDialog(null, "Please fill all Data!", "Message", JOptionPane.PLAIN_MESSAGE);
-				} else {
+				} 
+				else if(!isValid(emailtext.getText())) {
+					JOptionPane.showMessageDialog(null, "Please Enter a Valid Email!", "Message", JOptionPane.PLAIN_MESSAGE);
+				}
+				else {
 					data.lib[data.libCount][0] = idText.getText();
 					data.lib[data.libCount][1] = nametext.getText();
 					data.lib[data.libCount][2] = passwordtext.getText();
