@@ -13,8 +13,8 @@ public class Data {
 	books[] books = new books[30];
 	int booksCount = 0;
 	
-	public Object[][] lib = new Object[30][7];
-	public int libCount = 0;
+	int libCount = 0;
+	librarian[] lib = new librarian[30];	
 
 	public Object[][] issBooks = new Object[30][6];
 	public int issCount = 0;
@@ -48,8 +48,10 @@ public class Data {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(path));
 			while ((line = br.readLine()) != null) {
-				this.lib[this.libCount] = line.split(",");
-				this.libCount++;
+				String[] value = line.split(",");
+				
+			    lib[libCount] = new librarian(value[0], value[1], value[2], value[3], value[4], value[5], value[6]);
+				libCount++;
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -81,9 +83,8 @@ public class Data {
 			
 			//pw.println("Id,Name,Password,Email,Address,City,Contact");
 			for (int i = 0; i < libCount; i++) {
-
-				pw.println(lib[i][0] + "," + lib[i][1] + "," + lib[i][2] + "," + lib[i][3] + "," + lib[i][4] + ","
-						+ lib[i][5] + "," + lib[i][6]);
+				Object[] temp = lib[i].getAll();
+				pw.println(temp[0] + "," + temp[1] + "," + temp[2] + "," + temp[3] + "," + temp[4] + "," + temp[5] + "," + temp[6]);
 				pw.flush();
 			}
 			pw.close();

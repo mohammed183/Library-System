@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import java.awt.Point;
@@ -30,7 +31,8 @@ public class viewLibrarian extends JFrame {
 	public void AddLibrarian(Data data) {
 		DefaultTableModel model = (DefaultTableModel) librarianTable.getModel();
 		for (int i = 0; i < data.libCount; i++) {
-			model.addRow(data.lib[i]);
+			
+			model.addRow(data.lib[i].getAll());
 		}
 	}
 

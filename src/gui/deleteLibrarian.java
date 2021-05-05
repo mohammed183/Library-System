@@ -135,7 +135,7 @@ public class deleteLibrarian extends javax.swing.JFrame {
     	int newCount = data.libCount;
     	data.libCount =0;
     	for(int i = 0; i < newCount; i++) {
-    		if(delName.getText().equals(data.lib[i][1]) && delId.getText().equals(data.lib[i][0])) {
+    		if(delName.getText().equals(data.lib[i].getName()) && delId.getText().equals(data.lib[i].getId())) {
     			JOptionPane.showMessageDialog(null, "Deleted successfully!", "Message",JOptionPane.PLAIN_MESSAGE);
     			continue;
     		}

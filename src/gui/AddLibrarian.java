@@ -225,21 +225,17 @@ public class AddLibrarian extends JFrame {
 				} else {
 					Boolean valid = true;
 					for (int i = 0; i < data.libCount; i++) {
-						if (data.lib[i][0].equals(idText.getText())) {
+						if (data.lib[i].getId().equals(idText.getText())) {
 							valid = false;
 							JOptionPane.showMessageDialog(null, "ID already taken", "Message",
 									JOptionPane.PLAIN_MESSAGE);
 						}
 					}
 					if (valid) {
-						data.lib[data.libCount][0] = idText.getText();
-						data.lib[data.libCount][1] = nametext.getText().trim();
-						data.lib[data.libCount][2] = passwordtext.getText();
-						data.lib[data.libCount][3] = emailText.getText();
-						data.lib[data.libCount][4] = addresstext.getText().trim();
-						data.lib[data.libCount][5] = citytext.getText().trim();
-						data.lib[data.libCount][6] = contacttext.getText();
+						data.lib[data.libCount] = new librarian(idText.getText(), nametext.getText().trim(), passwordtext.getText(),
+								emailText.getText(), addresstext.getText().trim(), citytext.getText().trim(), contacttext.getText());
 						data.libCount++;
+
 
 						idText.setText("");
 						nametext.setText("");
@@ -250,7 +246,7 @@ public class AddLibrarian extends JFrame {
 						contacttext.setText("");
 						JOptionPane.showMessageDialog(null, "Librarian added successfully!", "Message",
 								JOptionPane.PLAIN_MESSAGE);
-						data.updateLibData();
+						//data.updateLibData();
 					}
 				}
 			}
