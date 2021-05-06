@@ -176,32 +176,34 @@ public class issueBook extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Boolean found = false;
 				Boolean found1 = false;
+				Boolean found2 = false;
+				
 				if (callTxt.getText().equals("") || stdTxt.getText().equals("") || stdntTxt.getText().equals("")
 						|| conTxt.getText().equals("")) {
 					JOptionPane.showMessageDialog(null, "Please fill all Data!", "Message", JOptionPane.PLAIN_MESSAGE);
 				} else {
 					for (int i = 0; i < data.booksCount; i++) {
 						if (callTxt.getText().equals(data.books[i].getCallNo())) {
+							found = true;
 							Integer x = data.books[i].getQuantity();
 							if (x < 1) {
-								found = true;
 								JOptionPane.showMessageDialog(null, "Book Currently not available", "Message",
 										JOptionPane.PLAIN_MESSAGE);
 							}
-
 							else {
 								for (int j = 0; j < data.stdCount; j++) {
 									if (data.std[j].getId().equals(stdTxt.getText())
 											&& data.std[j].getName().equals(stdntTxt.getText())
 											&& data.std[j].getContact().equals(conTxt.getText())) {
+										found2 = true;
 										if(data.std[j].getIss()  >= 3) {
 											JOptionPane.showMessageDialog(null, "Student can't borrow more boooks!", "Message",
 													JOptionPane.PLAIN_MESSAGE);
-											return;
 										}
 										else {
 										data.std[j].setIss(1);
-										found1 = true;}
+										found1 = true;
+										}
 										
 									}
 								}
@@ -231,11 +233,10 @@ public class issueBook extends JFrame {
 									data.updateissueData();
 									data.updateBookData();
 									data.updateStdData();
-									found = true;
 									JOptionPane.showMessageDialog(null, "Book issued successfully!", "Message",
 											JOptionPane.PLAIN_MESSAGE);
 								}
-								else {
+								else if(found && !found2) {
 									JOptionPane.showMessageDialog(null, "wrong student information!", "Message",
 											JOptionPane.PLAIN_MESSAGE);
 								}
