@@ -19,14 +19,14 @@ import javax.swing.JPasswordField;
 import java.awt.Point;
 import java.awt.Color;
 
-public class LibrarianLoginForm extends JFrame {
+public class StudentLoginForm extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField nameTxt;
 	private JPasswordField passTxt;
 
-	public LibrarianLoginForm(Data data) {
-		setTitle("Librarian Login Form");
+	public StudentLoginForm(Data data) {
+		setTitle("Student Login Form");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 560, 530);
@@ -35,7 +35,7 @@ public class LibrarianLoginForm extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("Librarian Login ");
+		JLabel lblNewLabel = new JLabel("Student Login ");
 		lblNewLabel.setForeground(Color.GRAY);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
@@ -57,15 +57,19 @@ public class LibrarianLoginForm extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean login = false;
-
-				for (int i = 0; i < data.libCount; i++) {
-					if (nameTxt.getText().equals(data.lib[i].getName()) && passTxt.getText().equals(data.lib[i].getPassword()))
+				int x = 0;
+				for (int i = 0; i < data.stdCount; i++) {
+					if (nameTxt.getText().equals(data.std[i].getName())
+							&& passTxt.getText().equals(data.std[i].getPassword())) {
 						login = true;
+						x = i;
+					}
+						
 				}
 				if (login) {
-					LibrarianSection x = new LibrarianSection(data);
-					x.setVisible(true);
-					LibrarianLoginForm.this.setVisible(false);
+					StudentSection d = new StudentSection(data, x);
+					d.setVisible(true);
+					StudentLoginForm.this.setVisible(false);
 				} else {
 					JOptionPane.showMessageDialog(null, "Invalid username or password!", "Message",
 							JOptionPane.PLAIN_MESSAGE);
@@ -89,7 +93,7 @@ public class LibrarianLoginForm extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				LibraryManagement admin = new LibraryManagement(data);
 				admin.setVisible(true);
-				LibrarianLoginForm.this.setVisible(false);
+				StudentLoginForm.this.setVisible(false);
 			}
 		});
 		btnBack.setBounds(10, 460, 80, 20);

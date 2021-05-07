@@ -10,16 +10,16 @@ import java.io.PrintWriter;
 
 public class Data {
 	
-	books[] books = new books[30];
-	int booksCount = 0;
+	Books[] Books = new Books[30];
+	int BooksCount = 0;
 	
 	int libCount = 0;
-	librarian[] lib = new librarian[30];	
+	Librarian[] lib = new Librarian[30];	
 	
 	int stdCount = 0;
-	student[] std = new student[30];
+	Student[] std = new Student[30];
 
-	issueBooks[] issBooks = new issueBooks[30];
+	IssueBooks[] issBooks = new IssueBooks[30];
 	int issCount = 0;
 
 	public Object[][] admins = new Object[30][2];
@@ -33,13 +33,13 @@ public class Data {
 
 	private void readData() {
 		String line = "";
-		String path = "books.txt";
+		String path = "Books.txt";
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(path));
 			while ((line = br.readLine()) != null) {
 				String[] values = line.split(",");
-				books[booksCount] = new books(values[0] , values[1], values[2], values[3], Integer.parseInt(values[4]), Integer.parseInt(values[5]), values[6]);
-				booksCount++;
+				Books[BooksCount] = new Books(values[0] , values[1], values[2], values[3], Integer.parseInt(values[4]), Integer.parseInt(values[5]), values[6]);
+				BooksCount++;
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -53,7 +53,7 @@ public class Data {
 			while ((line = br.readLine()) != null) {
 				String[] value = line.split(",");
 				
-			    lib[libCount] = new librarian(value[0], value[1], value[2], value[3], value[4], value[5], value[6]);
+			    lib[libCount] = new Librarian(value[0], value[1], value[2], value[3], value[4], value[5], value[6]);
 				libCount++;
 			}
 		} catch (FileNotFoundException e) {
@@ -68,7 +68,7 @@ public class Data {
 			while ((line = br.readLine()) != null) {
 				String[] value = line.split(",");
 				
-			    std[stdCount] = new student(value[0], value[1], value[2], value[3], value[4], value[5], value[6], Integer.parseInt(value[7]));
+			    std[stdCount] = new Student(value[0], value[1], value[2], value[3], value[4], value[5], value[6], Integer.parseInt(value[7]));
 				stdCount++;
 			}
 		} catch (FileNotFoundException e) {
@@ -82,7 +82,7 @@ public class Data {
 			BufferedReader br = new BufferedReader(new FileReader(path));
 			while ((line = br.readLine()) != null) {
 				String[] value = line.split(",");
-				issBooks[issCount] =new issueBooks(Integer.parseInt(value[0]), value[1], value[2], value[3], value[4], value[5]);						
+				issBooks[issCount] =new IssueBooks(Integer.parseInt(value[0]), value[1], value[2], value[3], value[4], value[5]);						
 				this.issCount++;
 			}
 		} catch (FileNotFoundException e) {
@@ -131,12 +131,12 @@ public class Data {
 	
 	public void updateBookData() {
 		try {
-			FileWriter fw = new FileWriter("books.txt");
+			FileWriter fw = new FileWriter("Books.txt");
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter pw = new PrintWriter(bw);
 
-			for (int i = 0; i < booksCount; i++) {
-				Object[] temp = books[i].getAll();
+			for (int i = 0; i < BooksCount; i++) {
+				Object[] temp = Books[i].getAll();
 				pw.println(temp[0] + "," + temp[1] + "," + temp[2] + "," + temp[3] + "," + temp[4] + "," + temp[5] + "," + temp[6]);
 				pw.flush();
 			}

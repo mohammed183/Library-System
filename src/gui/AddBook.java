@@ -275,8 +275,8 @@ public class AddBook extends javax.swing.JFrame {
 		else {
 			Boolean callNoValid = true;
 			String textDisplay = "";
-			for (int i = 0; i < data.booksCount; i++) {
-				if (Callnotxt.getText().equals(data.books[i].getCallNo())) {
+			for (int i = 0; i < data.BooksCount; i++) {
+				if (Callnotxt.getText().equals(data.Books[i].getCallNo())) {
 					callNoValid = false;
 					textDisplay = "This call number is already used!!";
 				}
@@ -288,8 +288,8 @@ public class AddBook extends javax.swing.JFrame {
 				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
 				String issDate = format.format(date);
-				data.books[data.booksCount] = new books(Callnotxt.getText(), Nametxt.getText().trim(), Authtxt.getText().trim(), Publishertxt.getText().trim(), Integer.parseInt(Quantitytxt.getText()), 0, issDate);
-				data.booksCount++;
+				data.Books[data.BooksCount] = new Books(Callnotxt.getText(), Nametxt.getText().trim(), Authtxt.getText().trim(), Publishertxt.getText().trim(), Integer.parseInt(Quantitytxt.getText()), 0, issDate);
+				data.BooksCount++;
 
 				Quantitytxt.setText("");
 				Publishertxt.setText("");

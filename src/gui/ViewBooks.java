@@ -22,8 +22,8 @@ public class ViewBooks extends javax.swing.JFrame {
 
 	public void AddBooks(Data data) {
 		DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-		for (int i = 0; i < data.booksCount; i++) {
-			model.addRow(data.books[i].getAll());
+		for (int i = 0; i < data.BooksCount; i++) {
+			model.addRow(data.Books[i].getAll());
 		}
 	}
 

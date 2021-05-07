@@ -52,18 +52,18 @@ public class ReturnBook extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        studentIdText = new javax.swing.JTextField();
-        studentIdText.addKeyListener(new KeyAdapter() {
+        StudentIdText = new javax.swing.JTextField();
+        StudentIdText.addKeyListener(new KeyAdapter() {
         	@Override
         	public void keyPressed(KeyEvent e) {
         		
         		if(Character.isDigit(e.getKeyChar()) || Character.isISOControl(e.getKeyChar())) {
-        			studentIdMessage.setText("");
-					studentIdText.setEditable(true);
+        			StudentIdMessage.setText("");
+					StudentIdText.setEditable(true);
 				}
 				else {
-					studentIdText.setEditable(false);
-					studentIdMessage.setText("numbers only!");
+					StudentIdText.setEditable(false);
+					StudentIdMessage.setText("numbers only!");
 					}		
         	}
         });
@@ -105,7 +105,7 @@ public class ReturnBook extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("Return Book");
 
-        studentIdText.addActionListener(new java.awt.event.ActionListener() {
+        StudentIdText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
             }
@@ -115,9 +115,9 @@ public class ReturnBook extends javax.swing.JFrame {
         bookCallMessage.setForeground(Color.RED);
         bookCallMessage.setFont(new Font("Tahoma", Font.PLAIN, 8));
         
-        studentIdMessage = new JLabel("");
-        studentIdMessage.setForeground(Color.RED);
-        studentIdMessage.setFont(new Font("Tahoma", Font.PLAIN, 8));
+        StudentIdMessage = new JLabel("");
+        StudentIdMessage.setForeground(Color.RED);
+        StudentIdMessage.setFont(new Font("Tahoma", Font.PLAIN, 8));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         layout.setHorizontalGroup(
@@ -147,13 +147,13 @@ public class ReturnBook extends javax.swing.JFrame {
         					.addGap(66)))
         			.addGroup(layout.createParallelGroup(Alignment.LEADING)
         				.addGroup(layout.createSequentialGroup()
-        					.addComponent(studentIdMessage, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(StudentIdMessage, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
         					.addContainerGap())
         				.addGroup(layout.createSequentialGroup()
         					.addGroup(layout.createParallelGroup(Alignment.LEADING)
         						.addComponent(bookCallMessage, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         						.addGroup(layout.createParallelGroup(Alignment.TRAILING, false)
-        							.addComponent(studentIdText, Alignment.LEADING)
+        							.addComponent(StudentIdText, Alignment.LEADING)
         							.addComponent(bookCallText, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)))
         					.addContainerGap(167, Short.MAX_VALUE))))
         );
@@ -170,10 +170,10 @@ public class ReturnBook extends javax.swing.JFrame {
         			.addComponent(bookCallMessage, GroupLayout.PREFERRED_SIZE, 11, GroupLayout.PREFERRED_SIZE)
         			.addGap(35)
         			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(studentIdText, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(StudentIdText, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
         				.addComponent(jLabel3))
         			.addPreferredGap(ComponentPlacement.UNRELATED)
-        			.addComponent(studentIdMessage, GroupLayout.PREFERRED_SIZE, 11, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(StudentIdMessage, GroupLayout.PREFERRED_SIZE, 11, GroupLayout.PREFERRED_SIZE)
         			.addPreferredGap(ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
         			.addComponent(jLabel1)
         			.addGap(7)
@@ -201,14 +201,14 @@ public class ReturnBook extends javax.swing.JFrame {
     	Boolean found = false;
     	for(int i = 0; i < data.issCount; i++) {
     		
-    		if(bookCallText.getText().equals(data.issBooks[i].getBookCallNo()) && studentIdText.getText().equals(data.issBooks[i].getStudentId())) {
+    		if(bookCallText.getText().equals(data.issBooks[i].getBookCallNo()) && StudentIdText.getText().equals(data.issBooks[i].getStudentId())) {
     			int index = -1;
-    			for (int j = 0; j < data.booksCount; j++) {
-    				if (data.issBooks[i].getBookCallNo().equals(data.books[j].getCallNo()) )
+    			for (int j = 0; j < data.BooksCount; j++) {
+    				if (data.issBooks[i].getBookCallNo().equals(data.Books[j].getCallNo()) )
     	    			index = j;
     			}
-    			data.books[index].setIssued(-1);
-    			data.books[index].setQuantity(1);
+    			data.Books[index].setIssued(-1);
+    			data.Books[index].setQuantity(1);
     			index = 0;
     			int count = 0;
     			while (index < data.issCount) {
@@ -231,7 +231,7 @@ public class ReturnBook extends javax.swing.JFrame {
 					e.printStackTrace();
 				}
 				for(int j = 0; j < data.stdCount; j++) {
-					if(data.std[j].getId().equals(studentIdText.getText())) {
+					if(data.std[j].getId().equals(StudentIdText.getText())) {
 						data.std[j].setIss(-1);
 					}
 				}
@@ -244,7 +244,6 @@ public class ReturnBook extends javax.swing.JFrame {
 				long diff = reDate.getTime() - issDate.getTime(); 
 				int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 				found = true;
-				System.out.println(days);
 				
 				if(days > 2) {
 					JOptionPane.showMessageDialog(null, "Late return fee should be paid: " + ((days - 2)*2)+ "$", "Message",JOptionPane.PLAIN_MESSAGE);
@@ -264,8 +263,8 @@ public class ReturnBook extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField bookCallText;
-    private javax.swing.JTextField studentIdText;
+    private javax.swing.JTextField StudentIdText;
     private JLabel bookCallMessage;
-    private JLabel studentIdMessage;
+    private JLabel StudentIdMessage;
 
 }

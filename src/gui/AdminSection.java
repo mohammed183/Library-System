@@ -70,7 +70,7 @@ public class AdminSection extends javax.swing.JFrame {
 		JButton btnNewButton = new JButton("Add Student");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				addStudent x = new addStudent(data);
+				AddStudent x = new AddStudent(data);
 				x.setVisible(true);
 				AdminSection.this.setVisible(false);
 			}
@@ -130,14 +130,14 @@ public class AdminSection extends javax.swing.JFrame {
 	}
 
 	private void jButton3ActionPerformed(java.awt.event.ActionEvent evt, Data data) {
-		deleteLibrarian x = new deleteLibrarian(data);
+		DeleteLibrarian x = new DeleteLibrarian(data);
 		x.setVisible(true);
 		AdminSection.this.setVisible(false);
 	}
 
 	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt, Data data) {
 
-		viewLibrarian x = new viewLibrarian(data);
+		ViewLibrarian x = new ViewLibrarian(data);
 		x.setVisible(true);
 		this.setVisible(false);
 

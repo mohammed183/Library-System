@@ -49,14 +49,14 @@ public class AdminLoginForm extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				/*if(adminNameText.getText().equals(data.admins[0][0]) && adminPassText.getText().equals(data.admins[0][1]) ) {*/
+				if(adminNameText.getText().equals(data.admins[0][0]) && adminPassText.getText().equals(data.admins[0][1]) ) {
 				AdminSection admin = new AdminSection(data);
 				admin.setVisible(true);
 				AdminLoginForm.this.setVisible(false);}
-				//else {
-				//	JOptionPane.showMessageDialog(null, "Invalid name or password!!!", "Message",
-				//			JOptionPane.PLAIN_MESSAGE);
-				//}	}
+				else {
+					JOptionPane.showMessageDialog(null, "Invalid name or password!!!", "Message",
+							JOptionPane.PLAIN_MESSAGE);
+				}	}
 		});
 		btnNewButton.setBounds(205, 404, 129, 32);
 		contentPane.add(btnNewButton);

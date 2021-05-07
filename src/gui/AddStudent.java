@@ -23,7 +23,7 @@ import java.awt.event.KeyEvent;
 import java.io.CharConversionException;
 import java.util.regex.Pattern;
 
-public class AddLibrarian extends JFrame {
+public class AddStudent extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField nametext;
@@ -43,7 +43,10 @@ public class AddLibrarian extends JFrame {
 	private JLabel citymessage;
 	private JLabel contactmessage;
 	private JLabel passwordMessage1;
+	private JLabel passwordMessage;
 
+	
+	
 	public static boolean isValid(String email)// email validation function
 	{
 		String emailRegex = "^[a-zA-Z0-9_+&*-\\.]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
@@ -53,16 +56,13 @@ public class AddLibrarian extends JFrame {
 		return Pattern.matches(emailRegex, email);
 	}
 	
-	public static boolean password(String password) {
-		
-		return false;
-	}
+	
 
-	public AddLibrarian(Data data) {
+	public AddStudent(Data data) {
 
 		setPreferredSize(new Dimension(560, 530));
 
-		setTitle("Add Librarian");
+		setTitle("Add Student");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 560, 530);
@@ -72,7 +72,7 @@ public class AddLibrarian extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("Add Librarian");
+		JLabel lblNewLabel = new JLabel("Add Student");
 		lblNewLabel.setForeground(Color.GRAY);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -83,13 +83,6 @@ public class AddLibrarian extends JFrame {
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblNewLabel_1.setBounds(36, 103, 75, 24);
 		contentPane.add(lblNewLabel_1);
-		
-		JLabel passwordMessage = new JLabel("");
-		passwordMessage.setForeground(Color.RED);
-		passwordMessage.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		passwordMessage.setBounds(397, 167, 149, 20);
-		contentPane.add(passwordMessage);
-		setLocation(new Point(500, 100));
 
 		nametext = new JTextField();
 		nametext.addKeyListener(new KeyAdapter() {
@@ -118,7 +111,7 @@ public class AddLibrarian extends JFrame {
 		emailText = new JTextField();
 		emailText.setTransferHandler(null);
 		emailText.setCaretColor(Color.BLACK);
-		/*emailText.addKeyListener(new KeyAdapter() {
+		emailText.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
 
 				if (Character.isLetter(e.getKeyChar()) || Character.isWhitespace(e.getKeyChar())
@@ -132,7 +125,7 @@ public class AddLibrarian extends JFrame {
 					emailText.setEditable(false);
 				}
 			}
-		});*/
+		});
 		emailText.setForeground(Color.BLACK);
 		emailText.setColumns(10);
 		emailText.setBounds(175, 227, 212, 24);
@@ -144,9 +137,9 @@ public class AddLibrarian extends JFrame {
 		contentPane.add(lblNewLabel_1_2);
 
 		passwordtext = new JTextField();
-	 	passwordtext.addKeyListener(new KeyAdapter() {
-	 
+		passwordtext.addKeyListener(new KeyAdapter() {
 			@Override
+					
 			public void keyPressed(KeyEvent e) {
 				if (Character.isWhitespace(e.getKeyChar())) {
 					passwordMessage1.setText("spaces are not allowed!!");
@@ -175,7 +168,6 @@ public class AddLibrarian extends JFrame {
 				}
 			}
 		});
-	
 		passwordtext.setTransferHandler(null);
 		passwordtext.setColumns(10);
 		passwordtext.setBounds(175, 167, 212, 24);
@@ -256,7 +248,7 @@ public class AddLibrarian extends JFrame {
 		contacttext.setBounds(175, 407, 212, 24);
 		contentPane.add(contacttext);
 
-		btnNewButton = new JButton("Add Librarian");
+		btnNewButton = new JButton("Add ");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -269,8 +261,8 @@ public class AddLibrarian extends JFrame {
 							JOptionPane.PLAIN_MESSAGE);
 				} else {
 					Boolean valid = true;
-					for (int i = 0; i < data.libCount; i++) {
-						if (data.lib[i].getId().equals(idText.getText())) {
+					for (int i = 0; i < data.stdCount; i++) {
+						if (data.std[i].getId().equals(idText.getText())) {
 							valid = false;
 							JOptionPane.showMessageDialog(null, "ID already taken", "Message",
 									JOptionPane.PLAIN_MESSAGE);
@@ -282,10 +274,10 @@ public class AddLibrarian extends JFrame {
 								JOptionPane.PLAIN_MESSAGE);
 					}
 					else if (valid) {
-						data.lib[data.libCount] = new Librarian(idText.getText(), nametext.getText().trim(), passwordtext.getText(),
-								emailText.getText(), addresstext.getText().trim(), citytext.getText().trim(), contacttext.getText());
-						data.libCount++;
-						data.updateLibData();
+						data.std[data.stdCount] = new Student(idText.getText(), nametext.getText().trim(), passwordtext.getText(),
+								emailText.getText(), addresstext.getText().trim(), citytext.getText().trim(), contacttext.getText(), 0);
+						data.stdCount++;
+						data.updateStdData();
 
 						idText.setText("");
 						nametext.setText("");
@@ -304,9 +296,9 @@ public class AddLibrarian extends JFrame {
 						citymessage.setText("");
 						contactmessage.setText("");
 						getToolkit().beep();
-						JOptionPane.showMessageDialog(null, "Librarian added successfully!", "Message",
+						JOptionPane.showMessageDialog(null, "Student added successfully!", "Message",
 								JOptionPane.PLAIN_MESSAGE);
-
+						
 					}
 				}
 			}
@@ -320,7 +312,7 @@ public class AddLibrarian extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				AdminSection x = new AdminSection(data);
 				x.setVisible(true);
-				AddLibrarian.this.setVisible(false);
+				AddStudent.this.setVisible(false);
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -394,5 +386,10 @@ public class AddLibrarian extends JFrame {
 		passwordMessage1.setBounds(175, 190, 212, 13);
 		contentPane.add(passwordMessage1);
 		
+		passwordMessage = new JLabel("");
+		passwordMessage.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		passwordMessage.setBounds(397, 170, 149, 13);
+		contentPane.add(passwordMessage);
+		setLocation(new Point(500, 100));
 	}
 }

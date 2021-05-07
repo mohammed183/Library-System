@@ -71,22 +71,22 @@ public class LibrarianSection extends JFrame {
 		btnLogout.setBounds(157, 400, 225, 37);
 		contentPane.add(btnLogout);
 
-		JButton btnIssuebooks = new JButton("Issue Book");
-		btnIssuebooks.addActionListener(new ActionListener() {
+		JButton btnIssueBooks = new JButton("Issue Book");
+		btnIssueBooks.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				issueBook x = new issueBook(data);
+				IssueBook x = new IssueBook(data);
 				x.setVisible(true);
 				LibrarianSection.this.setVisible(false);
 			}
 		});
-		btnIssuebooks.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnIssuebooks.setBounds(157, 220, 225, 37);
-		contentPane.add(btnIssuebooks);
+		btnIssueBooks.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnIssueBooks.setBounds(157, 220, 225, 37);
+		contentPane.add(btnIssueBooks);
 
-		JButton btnViewIssuedBooks = new JButton("view Issued Books");
+		JButton btnViewIssuedBooks = new JButton("View Issued Books");
 		btnViewIssuedBooks.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				viewIssuedBooks x = new viewIssuedBooks(data);
+				ViewIssuedBooks x = new ViewIssuedBooks(data);
 				x.setVisible(true);
 				LibrarianSection.this.setVisible(false);
 			}

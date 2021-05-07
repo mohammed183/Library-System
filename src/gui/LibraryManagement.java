@@ -107,7 +107,7 @@ public class LibraryManagement extends javax.swing.JFrame {
         JButton btnStudentLogin = new JButton();
         btnStudentLogin.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		studentLoginForm admin = new studentLoginForm(data);
+        		StudentLoginForm admin = new StudentLoginForm(data);
                 admin.setVisible(true);
                 LibraryManagement.this.setVisible(false);
         	}
